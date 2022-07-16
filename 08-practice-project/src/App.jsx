@@ -6,31 +6,29 @@ import ErrorModal from './Components/UI/ErrorModal'
 
 function App() {
   const [allUsers, setAllUsers] = useState([])
-  const [showModal, setShowModal] = useState(false)
-  const [errorMessage, setErrorMessage] = useState('')
+  const [errorMessage, setErrorMessage] = useState()
 
-  const closeModalHandler = () => setShowModal(false)
+  const closeModalHandler = () => setErrorMessage('')
 
   const addUserHandler = (userData) => {
     setAllUsers((old) => [userData, ...old])
   }
 
-  const onAddUserError = (message) => {
-    setShowModal(true)
-    setErrorMessage(message)
+  const onAddUserError = (data) => {
+    setErrorMessage({ ...data })
   }
+
   return (
     <>
-      <div>
-        {showModal ? (
-          <ErrorModal onCloseModal={closeModalHandler} message={errorMessage} />
-        ) : (
-          ''
-        )}
+      {errorMessage ? (
+        <ErrorModal onCloseModal={closeModalHandler} message={errorMessage} />
+      ) : (
+        ''
+      )}
 
-        <AddUser onAddingUser={addUserHandler} onError={onAddUserError} />
-        <UsersList data={allUsers} />
-      </div>
+      <AddUser onAddingUser={addUserHandler} onError={onAddUserError} />
+
+      <UsersList users={allUsers} />
     </>
   )
 }

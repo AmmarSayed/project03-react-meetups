@@ -1,33 +1,48 @@
 import React, { useState } from 'react'
 import Card from '../UI/Card'
 import styles from './AddUser.module.css'
-
+import Button from '../UI/Button'
 const AddUserForm = (props) => {
   const [formData, setFormData] = useState({ userAge: 0, userName: '' })
 
   const updateFormData = (e) => {
     const { name, value, type } = e.target
+    // create a new object with a new id
     const newObj = {
       [name]: type === 'number' ? +value : value,
-      id: new Date().getTime(),
+      id: new Date().getTime().toString(),
     }
+    // update the state
     setFormData((old) => ({ ...old, ...newObj }))
   }
 
   const submitFormHandler = (e) => {
     e.preventDefault()
-    if (formData.userName.trim() === '') {
-      props.onError(`this is an invalid name`)
+    if (formData.userName.trim().length === 0) {
+      props.onError({
+        title: 'Invalid name',
+        message: `This is an invalid name`,
+      })
       return
     }
+
+    if (+formData.userAge < 1) {
+      props.onError({
+        title: 'Invalid Age',
+        message: `Age must be greater than 0!!`,
+      })
+      return
+    }
+
     props.onAddingUser(formData)
-    setFormData({ userAge: 0, userName: '' })
+    // resetting form inputs
+    setFormData({ userAge: '', userName: '' })
   }
 
   return (
-    <Card>
+    <Card className={styles.input}>
       <form onSubmit={submitFormHandler}>
-        <div className={styles.input}>
+        <div>
           <label htmlFor='username'>Username</label>
           <input
             id='username'
@@ -41,7 +56,6 @@ const AddUserForm = (props) => {
           <input
             id='userAge'
             type='number'
-            min={10}
             max={99}
             name='userAge'
             value={formData.userAge}
@@ -49,7 +63,7 @@ const AddUserForm = (props) => {
           />
         </div>
 
-        <button type='submit'>Add User</button>
+        <Button type='submit'>Add User</Button>
       </form>
     </Card>
   )
