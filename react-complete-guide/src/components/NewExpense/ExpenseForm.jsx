@@ -20,11 +20,10 @@ const ExpenseForm = props => {
     const expenseData = {
       ...formData,
       amount: +formData.amount,
-      date: new Date(formData.date).toISOString(),
+      date: new Date(formData.date),
     };
 
     props.onSaveExpenseData(expenseData);
-
     setFormData({ title: '', amount: 0, date: '' });
   };
 
@@ -59,6 +58,9 @@ const ExpenseForm = props => {
         </div>
       </div>
       <div className='new-expense__actions'>
+        <button type='button' onClick={props.onHideForm}>
+          Cancel
+        </button>
         <button type='submit'>Add Expense</button>
       </div>
     </form>
