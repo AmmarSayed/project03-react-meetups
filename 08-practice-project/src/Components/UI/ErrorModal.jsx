@@ -5,7 +5,7 @@ import Button from './Button'
 
 const ErrorModal = (props) => {
   return (
-    <>
+    <React.Fragment>
       <div className={styles.backdrop} onClick={props.onCloseModal}></div>
 
       <Card className={styles.modal}>
@@ -20,7 +20,7 @@ const ErrorModal = (props) => {
           <Button onClick={props.onCloseModal}>Okay</Button>
         </footer>
       </Card>
-    </>
+    </React.Fragment>
   )
 }
 
