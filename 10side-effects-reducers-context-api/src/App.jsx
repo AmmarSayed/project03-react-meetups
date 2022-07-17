@@ -1,40 +1,22 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react';
 
-import Login from './components/Login/Login'
-import Home from './components/Home/Home'
-import MainHeader from './components/MainHeader/MainHeader'
+import Login from './components/Login/Login';
+import Home from './components/Home/Home';
+import MainHeader from './components/MainHeader/MainHeader';
+
+import { useAuthContext } from './store/AuthContext';
 
 function App() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false)
-
-  const loginHandler = (email, password) => {
-    // We should of course check email and password
-    // But it's just a dummy/ demo anyways
-    localStorage.setItem('isLoggedIn', '1')
-    setIsLoggedIn(true)
-  }
-
-  const logoutHandler = () => {
-    setIsLoggedIn(false)
-    localStorage.removeItem('isLoggedIn')
-  }
-
-  useEffect(() => {
-    const storedLoginInfo = localStorage.getItem('isLoggedIn')
-    if (storedLoginInfo === '1') {
-      setIsLoggedIn(true)
-    }
-  }, [isLoggedIn])
-
+  const ctxt = useAuthContext();
   return (
-    <React.Fragment>
-      <MainHeader isAuthenticated={isLoggedIn} onLogout={logoutHandler} />
+    <>
+      <MainHeader />
       <main>
-        {!isLoggedIn && <Login onLogin={loginHandler} />}
-        {isLoggedIn && <Home onLogout={logoutHandler} />}
+        {!ctxt.isLoggedIn && <Login />}
+        {ctxt.isLoggedIn && <Home />}
       </main>
-    </React.Fragment>
-  )
+    </>
+  );
 }
 
-export default App
+export default App;

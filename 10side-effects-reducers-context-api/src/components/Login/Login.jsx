@@ -1,8 +1,9 @@
-import React, { useState, useEffect, useReducer } from 'react';
+import React, { useState, useEffect, useReducer, useContext } from 'react';
 
 import Card from '../UI/Card/Card';
 import classes from './Login.module.css';
 import Button from '../UI/Button/Button';
+import AuthContext from '../../store/AuthContext';
 
 // email reducer function
 const emailReducer = (state, action) => {
@@ -22,7 +23,7 @@ const passwordReducer = (state, action) => {
   return { value: '', isValid: false };
 };
 
-const Login = (props) => {
+const Login = () => {
   // const [enteredEmail, setEnteredEmail] = useState('');
   // const [emailIsValid, setEmailIsValid] = useState();
   // const [enteredPassword, setEnteredPassword] = useState('');
@@ -42,7 +43,6 @@ const Login = (props) => {
   // use effect will run after the state updates
   // we validate the email and password state
   useEffect(() => {
-    console.log('Checking Validity');
     const timeoutReference = setTimeout(() => {
       // delay checking for validity, so we check after 1 second
       // check if the user stopped typing
@@ -56,6 +56,8 @@ const Login = (props) => {
     };
     // run the use effect whever the validity changes, not the entire state
   }, [emailState.isValid, passwordState.isValid]);
+
+  const authCtxt = useContext(AuthContext);
 
   const emailChangeHandler = (event) => {
     const action = { type: 'USER_INPUT', val: event.target.value };
@@ -83,7 +85,7 @@ const Login = (props) => {
 
   const submitHandler = (event) => {
     event.preventDefault();
-    props.onLogin(emailState.value, passwordState.value);
+    authCtxt.onLogin(emailState.value, passwordState.value);
   };
 
   return (
