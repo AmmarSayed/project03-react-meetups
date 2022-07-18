@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { useAuthContext } from '../../store/AuthContext';
 import Button from '../UI/Button/Button';
 

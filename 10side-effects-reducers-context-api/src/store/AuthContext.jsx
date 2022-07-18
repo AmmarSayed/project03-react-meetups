@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext } from 'react';
+import React, { useEffect, useState, useContext } from "react";
 
 const AuthContext = React.createContext({
   isLoggedIn: false,
@@ -20,18 +20,18 @@ export const AuthContextProvider = (props) => {
   const loginHandler = (email, password) => {
     // We should of course check email and password
     // But it's just a dummy/ demo anyways
-    localStorage.setItem('isLoggedIn', '1');
+    localStorage.setItem("isLoggedIn", "1");
     setIsLoggedIn(true);
   };
 
   const logoutHandler = () => {
     setIsLoggedIn(false);
-    localStorage.removeItem('isLoggedIn');
+    localStorage.removeItem("isLoggedIn");
   };
 
   useEffect(() => {
-    const storedLoginInfo = localStorage.getItem('isLoggedIn');
-    if (storedLoginInfo === '1') {
+    const storedLoginInfo = localStorage.getItem("isLoggedIn");
+    if (storedLoginInfo === "1") {
       setIsLoggedIn(true);
     }
   }, [isLoggedIn]);

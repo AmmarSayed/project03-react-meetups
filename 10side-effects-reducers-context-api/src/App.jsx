@@ -1,10 +1,11 @@
-import React from 'react';
+import React from "react";
 
-import Login from './components/Login/Login';
-import Home from './components/Home/Home';
-import MainHeader from './components/MainHeader/MainHeader';
+import Login from "./components/Login/Login";
+import Home from "./components/Home/Home";
+import MainHeader from "./components/MainHeader/MainHeader";
 
-import { useAuthContext } from './store/AuthContext';
+import { useAuthContext } from "./store/AuthContext";
+import { useState } from "react";
 
 function App() {
   const ctxt = useAuthContext();
