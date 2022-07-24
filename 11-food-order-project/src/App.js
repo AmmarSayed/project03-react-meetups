@@ -1,13 +1,25 @@
-import React, {  useState } from 'react'
+import React, { useState } from "react";
 
-
+import Header from "./components/Layout/Header";
+import Meals from "./components/Meals/Meals";
+import Cart from "./components/Cart/Cart";
+import CartContextProvider from "./store/cart-context";
 
 const App = () => {
-  const [data,setData] =useState()
+  const [cartIsShown, setCartIsShown] = useState(false);
+
+  const showCartHandler = () => setCartIsShown(true);
+  const hideCartHandler = () => setCartIsShown(false);
 
   return (
-    <div>App</div>
-  )
-}
+    <CartContextProvider>
+      {cartIsShown && <Cart onCloseCart={hideCartHandler} />}
+      <Header onShowCart={showCartHandler} />
+      <main>
+        <Meals />
+      </main>
+    </CartContextProvider>
+  );
+};
 
-export default App
+export default App;

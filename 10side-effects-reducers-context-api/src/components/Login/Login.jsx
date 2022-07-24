@@ -6,6 +6,7 @@ import Button from '../UI/Button/Button';
 import AuthContext from '../../store/AuthContext';
 import Input from '../UI/Input/Input';
 
+
 // email reducer function
 const emailReducer = (state, action) => {
   if (action.type === 'USER_INPUT') {
@@ -83,6 +84,7 @@ function Login() {
   // const validatePasswordHandler = () => {
   //   setPasswordIsValid(enteredPassword.trim().length > 6)
   // }
+
 
   const submitHandler = (event) => {
     event.preventDefault();
