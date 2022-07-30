@@ -126,7 +126,6 @@ const BasicForm = (props) => {
       </div>
     </form>
   );
-  document.body.insertAdjacentHTML();
 };
 
 export default BasicForm;
