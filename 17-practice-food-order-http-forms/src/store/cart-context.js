@@ -5,6 +5,7 @@ const CartContext = React.createContext({
   totalAmount: 0,
   addItem: () => {},
   removeItem: (id) => {},
+  clearCart: () => {},
 });
 
 // The below is an easy way to use the context
@@ -12,6 +13,11 @@ const CartContext = React.createContext({
 // so we won't have to import the useContext on the other components
 export const useCartContext = () => {
   return useContext(CartContext);
+};
+
+const initialCartState = {
+  items: [],
+  totalAmount: 0,
 };
 
 const cartReducer = (state, action) => {
@@ -66,15 +72,12 @@ const cartReducer = (state, action) => {
         totalAmount: updatedTotalAmount,
       };
     }
-
+    case "CLEAR": {
+      return initialCartState;
+    }
     default:
       return state;
   }
-};
-
-const initialCartState = {
-  items: [],
-  totalAmount: 0,
 };
 
 // Context provider to wrap the components
@@ -92,12 +95,16 @@ export const CartContextProvider = (props) => {
   const removeItemToCartHandler = (id) => {
     dispatchCartAction({ type: "REMOVE", id: id });
   };
+  const clearCartHandler = () => {
+    dispatchCartAction({ type: "CLEAR" });
+  };
 
   const cartContext = {
     items: cartState.items,
     totalAmount: cartState.totalAmount,
     addItem: addItemToCartHandler,
     removeItem: removeItemToCartHandler,
+    clearCart: clearCartHandler,
   };
 
   return (
