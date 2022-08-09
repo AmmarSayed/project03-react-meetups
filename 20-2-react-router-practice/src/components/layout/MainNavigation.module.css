@@ -34,4 +34,5 @@
 .nav a:active,
 .nav a.active {
   color: #e6fcfc;
+  border-bottom: 3px solid #88dfdf;
 }
