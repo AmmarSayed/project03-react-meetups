@@ -1,5 +1,6 @@
 import { useRef, useState } from "react";
 import { Prompt } from "react-router-dom";
+
 import Card from "../ui/Card";
 import LoadingSpinner from "../ui/LoadingSpinner";
 
@@ -16,7 +17,7 @@ const QuoteForm = (props) => {
     const enteredAuthor = authorInputRef.current.value;
     const enteredText = textInputRef.current.value;
 
-    // optional: Could validate here
+    // optional: we Could validate here
 
     props.onAddQuote({ author: enteredAuthor, text: enteredText });
   }
