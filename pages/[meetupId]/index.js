@@ -31,7 +31,7 @@ export async function getStaticPaths() {
 
   // return  the paths array
   return {
-    fallback: false,
+    fallback: "blocking",
     paths: paths,
   };
 }
